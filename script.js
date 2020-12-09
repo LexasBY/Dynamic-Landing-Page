@@ -5,30 +5,23 @@ const name = document.getElementById('name');
 const focus = document.getElementById('focus');
 
 // Show time
-function showTime() {
+showTime = () => {
   let today = new Date();
   let hour = today.getHours();
   let min = today.getMinutes();
   let sec = today.getSeconds();
-
-  // Set AM or PM ????
-  //const amPm = hour >= 12 ? 'PM' : 'AM';
-
-  // 12hr Format
-  //hour = hour % 12 || 12;
-
   //Output time
   time.innerHTML = `${addZero(hour)}<span>:</span>${addZero(min)}<span>:</span>${addZero(sec)}`;
   setTimeout(showTime, 1000);
-}
+};
 
 // Add Zero
-function addZero(n) {
+addZero = (n) => {
   return (parseInt(n, 10) < 10 ? '0' : '') + n;
 }
 
 // Set Background and Greeting 
-function setBgGreet() {
+setBgGreet = () => {
   let today = new Date();
   let hour = today.getHours();
   if(hour < 11) {
@@ -47,6 +40,7 @@ function setBgGreet() {
     greeting.textContent = 'Good Evening';
     document.body.style.color = 'white';
   } else {
+    // Night
     document.body.style.backgroundImage = "url('./img/night.jpg')";
     greeting.textContent = 'Good Night';
     document.body.style.color = 'white';
@@ -54,7 +48,7 @@ function setBgGreet() {
 }
 
 // Get Name
-function getName(){
+getName = () => {
   if(localStorage.getItem('name') === null) {
     name.textContent = '[Enter Name]';
   } else {
@@ -63,7 +57,7 @@ function getName(){
 }
 
 // Set Name
-function setName(e) {
+setName = (e) => {
   if(e.type === 'keypress'){
     if(e.which == 13 || e.keyCode == 13) {
       localStorage.setItem('name', e.target.innerText)
@@ -75,7 +69,7 @@ function setName(e) {
 }
 
 // Get Focus
-function getFocus(){
+getFocus = () => {
   if(localStorage.getItem('focus') === null) {
     focus.textContent = '[Enter Focus]';
   } else {
@@ -84,7 +78,7 @@ function getFocus(){
 }
 
 // Set Focus
-function setFocus(e) {
+setFocus = (e) => {
   if(e.type === 'keypress'){
     if(e.which == 13 || e.keyCode == 13) {
       localStorage.setItem('focus', e.target.innerText)
@@ -94,7 +88,6 @@ function setFocus(e) {
     localStorage.setItem('focus', e.target.innerText)
   }
 }
-
 
 name.addEventListener('keypress', setName);
 name.addEventListener('blur', setName);
@@ -106,5 +99,3 @@ showTime();
 setBgGreet();
 getName();
 getFocus();
-
-
